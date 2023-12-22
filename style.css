@@ -7,7 +7,10 @@
 body{
   font-family: 'Inter', sans-serif;
 }
-
+.select-logo{
+  width: 20px;
+  margin-right: 5px;
+}
 .container{
   width: 100vw;
   height: 100vh;
@@ -16,7 +19,7 @@ body{
   text-align: center;
   margin: 2rem;
 }
- img{
+ .image{
   width: 250px;
   height: 300px;
   border-radius: .5rem ;
@@ -146,7 +149,7 @@ span{
   .select{
     width: 7rem;
   }
-  img{
+  .image{
     width: 200px;
     height: 250px;
   }

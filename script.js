@@ -5,6 +5,10 @@ const kids = document.getElementById("kids");
 const mens_card = document.querySelector(".mens_card");
 const womens_card = document.querySelector(".womens_card");
 const kids_card = document.querySelector(".kids_card");
+const men_image = document.querySelector('.men-image');
+const women_image = document.querySelector('.women-image');
+const kid_image = document.querySelector('.kid-image');
+
 
 let activeCategory = "mens";
 
@@ -48,7 +52,7 @@ function mensData(categories) {
         <div class="card">
         <div class='img-div'>
         ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
-            <img src="${item.image}" alt="">
+            <img class='image' src="${item.image}" alt="">
         </div>
         <div class='item-title'>
             <h3>${item.title}</h3>
@@ -77,7 +81,7 @@ function womensData(categories) {
     <div class="card">
         <div class='img-div'>
         ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
-            <img src="${item.image}" alt="">
+            <img class='image' src="${item.image}" alt="">
         </div>
         <div class='item-title'>
             <h3>${item.title}</h3>
@@ -106,7 +110,7 @@ function kidsData(categories) {
     <div class="card">
         <div class='img-div'>
         ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
-            <img src="${item.image}" alt="">
+            <img class='image' src="${item.image}" alt="">
         </div>
         <div class='item-title'>
             <h3>${item.title}</h3>
@@ -133,10 +137,29 @@ function highlightOption() {
   kids.classList.remove("active");
   if (activeCategory === "mens") {
     mens.classList.add("active");
+    showImage(men_image)
+    hideImage(women_image);
+    hideImage(kid_image);
   } else if (activeCategory === "womens") {
     womens.classList.add("active");
+    showImage(women_image);
+    hideImage(men_image);
+    hideImage(kid_image);
   } else if (activeCategory === "kids") {
     kids.classList.add("active");
+    showImage(kid_image)
+    hideImage(men_image)
+    hideImage(women_image)
+  }
+}
+function showImage(image){
+  if(image){
+    image.style.display = 'block'
+  }
+}
+function hideImage(image){
+  if(image){
+    image.style.display='none'
   }
 }
 // initially fetch all the data
