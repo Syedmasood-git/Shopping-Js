@@ -10,27 +10,32 @@ let activeCategory = "mens";
 
 //Fetch the Data from Api
 async function fetchData() {
-  const response = await fetch(
-    `https://cdn.shopify.com/s/files/1/0564/3685/0790/files/multiProduct.json`
-  );
-  const data = await response.json();
-  console.log(data.categories);
-  cards.innerHTML = "";
-  //check active category and fetch data
-  if (activeCategory === "mens") {
-    mensData(data.categories[0]);
-  } else if (activeCategory === "womens") {
-    womensData(data.categories[1]);
-  } else if (activeCategory === "kids") {
-    kidsData(data.categories[2]);
+  try {
+    const response = await fetch(
+      `https://cdn.shopify.com/s/files/1/0564/3685/0790/files/multiProduct.json`
+    );
+    const data = await response.json();
+    console.log(data.categories);
+    cards.innerHTML = "";
+    //check active category and fetch data
+    if (activeCategory === "mens") {
+      mensData(data.categories[0]);
+    } else if (activeCategory === "womens") {
+      womensData(data.categories[1]);
+    } else if (activeCategory === "kids") {
+      kidsData(data.categories[2]);
+    }
+    highlightOption();
+  } catch (error) {
+    console.log(error.message);
   }
-  highlightOption();
 }
 
 //Calculate Percentage on Offers
-function calculatePercentage(originalPrice,discountedPrice){
-    const percentageOff = ((originalPrice-discountedPrice)/originalPrice*100)
-    return Math.round(percentageOff)
+function calculatePercentage(originalPrice, discountedPrice) {
+  const percentageOff =
+    ((originalPrice - discountedPrice) / originalPrice) * 100;
+  return Math.round(percentageOff);
 }
 
 //Display Mens Category
@@ -42,7 +47,7 @@ function mensData(categories) {
     mensContainer.innerHTML = `
         <div class="card">
         <div class='img-div'>
-        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ''}
+        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
             <img src="${item.image}" alt="">
         </div>
         <div class='item-title'>
@@ -52,7 +57,10 @@ function mensData(categories) {
         <div class='price-div'>
             <div class='price'>RS ${item.price}</div>
             <div class='strike-price'><s>${item.compare_at_price}</s></div>
-            <div class='offer'>${calculatePercentage(item.compare_at_price,item.price)}% off</div>
+            <div class='offer'>${calculatePercentage(
+              item.compare_at_price,
+              item.price
+            )}% off</div>
         </div>
         <div class='btn'><button>Add To Cart</button></div>
     </div>`;
@@ -68,7 +76,7 @@ function womensData(categories) {
     womensContainer.innerHTML = `
     <div class="card">
         <div class='img-div'>
-        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ''}
+        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
             <img src="${item.image}" alt="">
         </div>
         <div class='item-title'>
@@ -78,7 +86,10 @@ function womensData(categories) {
         <div class='price-div'>
             <div class='price'>RS ${item.price}</div>
             <div class='strike-price'><s>${item.compare_at_price}</s></div>
-            <div class='offer'>${calculatePercentage(item.compare_at_price,item.price)}% off</div>
+            <div class='offer'>${calculatePercentage(
+              item.compare_at_price,
+              item.price
+            )}% off</div>
         </div>
         <div class='btn'><button>Add To Cart</button></div>
     </div>`;
@@ -94,7 +105,7 @@ function kidsData(categories) {
     kidsContainer.innerHTML = `
     <div class="card">
         <div class='img-div'>
-        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ''}
+        ${item.badge_text ? `<p class='badge'>${item.badge_text}</p>` : ""}
             <img src="${item.image}" alt="">
         </div>
         <div class='item-title'>
@@ -104,7 +115,10 @@ function kidsData(categories) {
         <div class='price-div'>
             <div class='price'>RS ${item.price}</div>
             <div class='strike-price'><s>${item.compare_at_price}</s></div>
-            <div class='offer'>${calculatePercentage(item.compare_at_price,item.price)}% off</div>
+            <div class='offer'>${calculatePercentage(
+              item.compare_at_price,
+              item.price
+            )}% off</div>
         </div>
         <div class='btn'><button>Add To Cart</button></div>
     </div>`;
